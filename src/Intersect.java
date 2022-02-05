@@ -63,7 +63,7 @@ public class Intersect {
                     System.out.println("Target found"); // debugging
 
                     // if i does not equal the last int in intersections then add i to intersections
-                    if (i != intersections.get(intersections.size() - 1))
+                    if (!intersections.contains(i))
                     {
                         System.out.println("Added " + i + " to intersections"); // debugging
                         intersections.add(i);
