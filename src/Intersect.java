@@ -1,25 +1,73 @@
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Random;
 
 public class Intersect {
 
+    private static final Random random = new Random();;
+
     public static void main(String[] args) {
-        int[] intArr = {1, 4, 8, 9, 11, 15, 17, 28, 41, 59};
-        int[] intArr2 = {4, 7, 11, 17, 19, 20, 23, 28, 37, 59, 81};
 
-        ArrayList<Integer> arrayList1 = new ArrayList<>();
-        ArrayList<Integer> arrayList2 = new ArrayList<>();
+        ArrayList<Integer> arrayList1;
+        ArrayList<Integer> arrayList2;
 
-        for (int i : intArr) {
-            arrayList1.add(i);
+        ArrayList<Long> timesOptimized = new ArrayList<>();
+        ArrayList<Long> timesIntersect = new ArrayList<>();
+
+        for (int i = 0; i < 100; i++) {
+            arrayList1 = randomizeData();
+            arrayList2 = randomizeData();
+
+            // runs the test for intersect()
+            long startTime = System.nanoTime();
+            System.out.println(intersect(arrayList1, arrayList2).size());
+            long endTime = System.nanoTime();
+
+            // saves time to complete
+            timesIntersect.add((endTime - startTime)/1000);
+
+            // runs the test for intersectOptimizedMaybe()
+            startTime = System.nanoTime();
+            System.out.println(intersectOptimizedMaybe(arrayList1, arrayList2).size());
+            endTime = System.nanoTime();
+
+            // saves time to complete
+            timesOptimized.add((endTime - startTime)/1000);
         }
 
-        for (int i : intArr2) {
-            arrayList2.add(i);
+        // calculate average times
+        long total = 0;
+        for (long l :
+                timesIntersect) {
+            total += l;
+        }
+        int averageForIntersect = (int) total/timesIntersect.size();
+
+        total = 0;
+        for (long l :
+                timesOptimized) {
+            total += l;
+        }
+        int averageForOptimized = (int) total/timesOptimized.size();
+
+        System.out.println("That took on average " + averageForIntersect + " microseconds for the regular intersect");
+        System.out.println("That took on average " + averageForOptimized + " microseconds for the optimized intersect");
+
+
+    }
+
+    private static ArrayList<Integer> randomizeData() {
+        ArrayList<Integer> arrayList = new ArrayList<>();
+        int amountOfTimes = random.nextInt(4000) + 8000; // 8000 till 12000 times
+
+        for (int i = 0; i < amountOfTimes; i++) {
+            arrayList.add(random.nextInt(1000000));
         }
 
-        System.out.println(intersectOptimizedMaybe(arrayList1, arrayList2));
+        arrayList.sort((Comparator.comparingInt(o -> o)));
 
+        return arrayList;
     }
 
     public static List<Integer> intersect(List<Integer> list1, List<Integer> list2) {
