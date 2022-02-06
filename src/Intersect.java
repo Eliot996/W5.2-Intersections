@@ -6,35 +6,16 @@ import java.util.Random;
 public class Intersect {
 
     private static final Random random = new Random();
+    private static final ArrayList<Long> timesOptimized = new ArrayList<>();
+    private static final ArrayList<Long> timesIntersect = new ArrayList<>();
 
     public static void main(String[] args) {
-
-        ArrayList<Integer> arrayList1;
-        ArrayList<Integer> arrayList2;
-
-        ArrayList<Long> timesOptimized = new ArrayList<>();
-        ArrayList<Long> timesIntersect = new ArrayList<>();
-
+        System.out.println("Working");
         for (int i = 0; i < 100; i++) {
-            arrayList1 = randomizeData();
-            arrayList2 = randomizeData();
-
-            // runs the test for intersect()
-            long startTime = System.nanoTime();
-            System.out.println(intersect(arrayList1, arrayList2).size());
-            long endTime = System.nanoTime();
-
-            // saves time to complete
-            timesIntersect.add((endTime - startTime)/1000);
-
-            // runs the test for intersectOptimizedMaybe()
-            startTime = System.nanoTime();
-            System.out.println(intersectOptimizedMaybe(arrayList1, arrayList2).size());
-            endTime = System.nanoTime();
-
-            // saves time to complete
-            timesOptimized.add((endTime - startTime)/1000);
+            runBenchmark();
+            System.out.print(".");
         }
+        System.out.println("\nDone!");
 
         // calculate average times
         int averageForIntersect = getAverage(timesIntersect);
@@ -44,6 +25,27 @@ public class Intersect {
         System.out.println("That took on average " + averageForOptimized + " microseconds for the optimized intersect");
 
 
+    }
+
+    private static void runBenchmark() {
+        ArrayList<Integer> arrayList1 = randomizeData();
+        ArrayList<Integer> arrayList2 = randomizeData();
+
+        // runs the test for intersect()
+        long startTime = System.nanoTime();
+        intersect(arrayList1, arrayList2);
+        long endTime = System.nanoTime();
+
+        // saves time to complete
+        timesIntersect.add((endTime - startTime)/1000);
+
+        // runs the test for intersectOptimizedMaybe()
+        startTime = System.nanoTime();
+        intersectOptimizedMaybe(arrayList1, arrayList2);
+        endTime = System.nanoTime();
+
+        // saves time to complete
+        timesOptimized.add((endTime - startTime)/1000);
     }
 
     private static int getAverage(ArrayList<Long> timesIntersect) {
