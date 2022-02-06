@@ -4,22 +4,24 @@ import java.util.List;
 public class Intersect {
 
     public static void main(String[] args) {
+        // initial data
         int[] intArr = {1, 4, 8, 9, 11, 15, 17, 28, 41, 59};
         int[] intArr2 = {4, 7, 11, 17, 19, 20, 23, 28, 37, 59, 81};
 
         ArrayList<Integer> arrayList1 = new ArrayList<>();
         ArrayList<Integer> arrayList2 = new ArrayList<>();
 
+        // copy arrays into the arraylists
         for (int i : intArr) {
             arrayList1.add(i);
         }
-
         for (int i : intArr2) {
             arrayList2.add(i);
         }
 
+        // run and print the results
+        System.out.println(intersect(arrayList1, arrayList2));
         System.out.println(intersectOptimizedMaybe(arrayList1, arrayList2));
-
     }
 
     public static List<Integer> intersect(List<Integer> list1, List<Integer> list2) {
