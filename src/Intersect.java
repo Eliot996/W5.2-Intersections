@@ -42,8 +42,8 @@ public class Intersect {
 
 
     private static ArrayList<Integer> intersections;
-    private static int currentPosition;
     private static List<Integer> list2;
+    private static int currentPosition;
 
     public static List<Integer> intersectOptimizedMaybe(List<Integer> list1, List<Integer> list2) {
         initWorkingData(list2);
@@ -54,7 +54,7 @@ public class Intersect {
             loopThroughList2(target);
         }
 
-        return intersections;
+        return resetAndReturn();
     }
 
     private static void initWorkingData(List<Integer> list2) {
@@ -62,6 +62,18 @@ public class Intersect {
         Intersect.list2 = list2;
         // set the current position to 0
         currentPosition = 0;
+    }
+
+    private static List<Integer> resetAndReturn() {
+        // save the list we want to return
+        List<Integer> listToReturn = intersections;
+
+        // reset data
+        intersections = null;
+        list2 = null;
+        currentPosition = 0;
+
+        return listToReturn;
     }
 
     private static void loopThroughList2(int target) {
