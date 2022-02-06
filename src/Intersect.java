@@ -51,7 +51,6 @@ public class Intersect {
         // loop through list1
         for (int target : list1)
         {
-            System.out.println("looking at: " + target); // debugging
             loopThroughList2(target);
         }
 
@@ -70,11 +69,7 @@ public class Intersect {
         // and while the taken int is larger than or equal to the int at the currentPosition in list2
         while (currentPosition < list2.size() && target >= list2.get(currentPosition))
         {
-            int observed = list2.get(currentPosition);
-
-            System.out.println("In list2 at position " + currentPosition + ": " + observed); // debugging
-
-            checkForEquality(target, observed);
+            checkForEquality(target, list2.get(currentPosition));
 
             // increment the currentPosition
             currentPosition++;
@@ -84,7 +79,6 @@ public class Intersect {
     private static void checkForEquality(int target, int observed) {
         if (target == observed)
         {
-            System.out.println("Target found"); // debugging
             addToIntersectionsIfNotPresent(target);
         }
     }
@@ -97,7 +91,6 @@ public class Intersect {
         }
         else if (target != intersections.get(intersections.size() - 1))
         {
-            System.out.println("Added " + target + " to intersections"); // debugging
             intersections.add(target);
         }
     }
