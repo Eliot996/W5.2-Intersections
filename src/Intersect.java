@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class Intersect {
 
-    private static final Random random = new Random();;
+    private static final Random random = new Random();
 
     public static void main(String[] args) {
 
@@ -37,24 +37,24 @@ public class Intersect {
         }
 
         // calculate average times
-        long total = 0;
-        for (long l :
-                timesIntersect) {
-            total += l;
-        }
-        int averageForIntersect = (int) total/timesIntersect.size();
-
-        total = 0;
-        for (long l :
-                timesOptimized) {
-            total += l;
-        }
-        int averageForOptimized = (int) total/timesOptimized.size();
+        int averageForIntersect = getAverage(timesIntersect);
+        int averageForOptimized = getAverage(timesOptimized);
 
         System.out.println("That took on average " + averageForIntersect + " microseconds for the regular intersect");
         System.out.println("That took on average " + averageForOptimized + " microseconds for the optimized intersect");
 
 
+    }
+
+    private static int getAverage(ArrayList<Long> timesIntersect) {
+        long total = 0;
+
+        for (long l :
+                timesIntersect) {
+            total += l;
+        }
+
+        return (int) total/ timesIntersect.size();
     }
 
     private static ArrayList<Integer> randomizeData() {
