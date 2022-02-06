@@ -23,8 +23,9 @@ public class Benchmarking {
 
         System.out.println("It took on average " + averageForIntersect + " microseconds for the regular intersect");
         System.out.println("It took on average " + averageForOptimized + " microseconds for the optimized intersect");
-
         System.out.println("Did the two algorithms get the same answer everytime? " + sameResult);
+        System.out.println();
+        System.out.println("The optimized algorithm was " + averageForIntersect/averageForOptimized + " times faster!");
     }
 
     private static void runBenchmark() {
