@@ -8,6 +8,7 @@ public class Intersect {
     private static final Random random = new Random();
     private static final ArrayList<Long> timesOptimized = new ArrayList<>();
     private static final ArrayList<Long> timesIntersect = new ArrayList<>();
+    private static boolean sameResult = true;
 
     public static void main(String[] args) {
         System.out.println("Working");
@@ -24,7 +25,7 @@ public class Intersect {
         System.out.println("That took on average " + averageForIntersect + " microseconds for the regular intersect");
         System.out.println("That took on average " + averageForOptimized + " microseconds for the optimized intersect");
 
-
+        System.out.println("Did the two algorithms get the same answer? " + sameResult);
     }
 
     private static void runBenchmark() {
@@ -33,7 +34,7 @@ public class Intersect {
 
         // runs the test for intersect()
         long startTime = System.nanoTime();
-        intersect(arrayList1, arrayList2);
+        List<Integer> listForIntersect = intersect(arrayList1, arrayList2);
         long endTime = System.nanoTime();
 
         // saves time to complete
@@ -41,11 +42,14 @@ public class Intersect {
 
         // runs the test for intersectOptimizedMaybe()
         startTime = System.nanoTime();
-        intersectOptimizedMaybe(arrayList1, arrayList2);
+        List<Integer> listForOptimized = intersectOptimizedMaybe(arrayList1, arrayList2);
         endTime = System.nanoTime();
 
         // saves time to complete
         timesOptimized.add((endTime - startTime)/1000);
+
+        // check that they have the same answer
+        sameResult = sameResult && listForIntersect.equals(listForOptimized);
     }
 
     private static int getAverage(ArrayList<Long> timesIntersect) {
