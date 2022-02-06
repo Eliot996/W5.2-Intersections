@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Random;
 
 public class Benchmarking {
+    private static final int arraySizeMinimum = 8000;
+    private static final int arraySizeVariance = 4000;
+    
     private static final Random random = new Random();
     private static final ArrayList<Long> timesOptimized = new ArrayList<>();
     private static final ArrayList<Long> timesIntersect = new ArrayList<>();
@@ -65,7 +68,7 @@ public class Benchmarking {
 
     private static ArrayList<Integer> randomizeData() {
         ArrayList<Integer> arrayList = new ArrayList<>();
-        int amountOfTimes = random.nextInt(4000) + 8000; // 8000 till 12000 times
+        int amountOfTimes = arraySizeMinimum + random.nextInt(arraySizeVariance);
 
         for (int i = 0; i < amountOfTimes; i++) {
             arrayList.add(random.nextInt(1000000));
