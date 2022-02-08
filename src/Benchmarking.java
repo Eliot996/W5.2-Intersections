@@ -4,8 +4,9 @@ import java.util.List;
 import java.util.Random;
 
 public class Benchmarking {
-    private static final int ARRAY_SIZE_MINIMUM = 8000;
-    private static final int ARRAY_SIZE_VARIANCE = 4000;
+    // to adjust the run
+    private static final int ARRAY_SIZE_MINIMUM = 800;
+    private static final int ARRAY_SIZE_VARIANCE = 400;
     private static final int BENCHMARKING_RUNS= 100;
 
     
