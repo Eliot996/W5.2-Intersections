@@ -9,7 +9,7 @@ public class Benchmarking {
     private static final int ARRAY_SIZE_VARIANCE = 400;
     private static final int BENCHMARKING_RUNS= 100;
 
-    
+    // working variables
     private static final Random random = new Random();
     private static final ArrayList<Long> timesOptimized = new ArrayList<>();
     private static final ArrayList<Long> timesIntersect = new ArrayList<>();
